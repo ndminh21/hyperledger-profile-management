@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        style
+            include ../css/style.css
+        
+        title All Profiles
+        body
+            div(class="profile-header")
+                img.login-image(src="https://ibsintelligence.com/wp-content/uploads/2020/08/Hyperledger.png" height=80 alt="Logo Image")
+                p(class="login-title") EMPLOYEE 
+            div(class="profile-content")
+                each profile in profiles
+                    div(class="profile-block-cover")
+                        div(class="profile-block")
+                            <div id="avatar"></div>
+                            p(class="profile-name") #{profile.name}
+                            p(class="profile-title") #{profile.title}
+                            p(class="profile-email") #{profile.email}
+                            a(href='/api/profile/' + profile.userid)  More Info
+                
+                

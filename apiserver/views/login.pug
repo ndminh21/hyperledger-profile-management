@@ -1,0 +1,37 @@
+doctype html
+html
+    head
+        style
+            include ../css/style.css
+        script.
+            function local (arr) {
+                var i;
+                i = "#{result}";
+                localStorage.setItem('xyz', i);
+            }
+            console.log('stored');
+            local();
+        title Blockchain Profile
+        body
+            div(class='header')
+                h1
+            div(class="min-content")
+                img.login-image(src="https://ibsintelligence.com/wp-content/uploads/2020/08/Hyperledger.png" height=80 alt="Logo Image")
+                p(class="login-title") LOGIN TO YOUR ACCOUNT
+                form(method='POST' action='/api/login')
+                    div(class="form__group field")
+                        input(type="input" class="form__field" placeholder="Enter your username" name="username" id='username' required)
+                        label(for="username" class="form__label") Username
+
+                    div(class="form__group field")
+                        input(type="password" class="form__field" placeholder="Enter your password" name="password" id='password' required)
+                        label(for="password" class="form__label") Password
+                    br
+                    input(type="checkbox") 
+                    span.login-remember Remember me   
+                    br 
+                    input(class='login-button' type='Submit' value='Click to login')
+                br
+                a(class='sign-up-link' href='/api/register')  Don't have an account yet? Sign Up?
+                br
+                p(class='error-msg') #{message}

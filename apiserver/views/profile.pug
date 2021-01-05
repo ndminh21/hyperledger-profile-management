@@ -1,0 +1,170 @@
+doctype html
+html
+    head
+        style
+            include ../css/style.css
+        script.
+            var something = function() {
+                console.log('something')
+                var element = document.getElementById("work");
+
+                var divBlock = document.createElement('div');
+                divBlock.classList.add("work-block");
+
+                // From input
+                var divFromInput = document.createElement('div');
+                divFromInput.classList.add("form__group");
+                divFromInput.classList.add("field");
+
+                var fromInput = document.createElement('input');
+                fromInput.classList.add("form__field");
+                fromInput.setAttribute("name", "from");
+                fromInput.setAttribute("required", "");
+
+                var fromLabel = document.createElement('label');
+                fromLabel.classList.add("form__label");
+                fromLabel.innerHTML = "From"
+
+                divFromInput.append(fromInput)
+                divFromInput.append(fromLabel)
+                divBlock.append(divFromInput)
+
+                // To input
+                var divToInput = document.createElement('div');
+                divToInput.classList.add("form__group");
+                divToInput.classList.add("field");
+
+                var toInput = document.createElement('input');
+                toInput.classList.add("form__field");
+                toInput.setAttribute("name", "to");
+                toInput.setAttribute("required", "");
+
+                var toLabel = document.createElement('label');
+                toLabel.classList.add("form__label");
+                toLabel.innerHTML = "To"
+
+                divToInput.append(toInput)
+                divToInput.append(toLabel)
+                divBlock.append(divToInput)
+
+                // Company input
+                var divCompanyInput = document.createElement('div');
+                divCompanyInput.classList.add("form__group");
+                divCompanyInput.classList.add("field");
+
+                var companyInput = document.createElement('input');
+                companyInput.classList.add("form__field");
+                companyInput.setAttribute("name", "company");
+                companyInput.setAttribute("required", "");
+
+                var companyLabel = document.createElement('label');
+                companyLabel.classList.add("form__label");
+                companyLabel.innerHTML = "Company"
+
+                divCompanyInput.append(companyInput)
+                divCompanyInput.append(companyLabel)
+                divBlock.append(divCompanyInput)
+
+
+                // Position input
+                var divPositionInput = document.createElement('div');
+                divPositionInput.classList.add("form__group");
+                divPositionInput.classList.add("field");
+
+                var positionInput = document.createElement('input');
+                positionInput.classList.add("form__field");
+                positionInput.setAttribute("name", "position");
+                positionInput.setAttribute("required", "");
+
+                var positionLabel = document.createElement('label');
+                positionLabel.classList.add("form__label");
+                positionLabel.innerHTML = "Position"
+
+                divPositionInput.append(positionInput)
+                divPositionInput.append(positionLabel)
+                divBlock.append(divPositionInput)
+
+
+                element.appendChild(divBlock)
+
+                var breakfirst = document.createElement('br');
+                var breaksecond = document.createElement('br');
+                element.appendChild(breakfirst)
+                element.appendChild(breaksecond)
+
+            }
+
+    title BlockChain Profile
+    body
+        div(class='header')
+            h1 Your Profile
+
+        div(class="content")
+            form(method='POST' action='/api/profile/update')
+                div(class='general')
+                    div(class='left')
+                        <div id="avatar"></div>
+
+                    div(class='mid')
+                        div(class="form__group field" style="display:none;")
+                            input(type="input" class="form__field" placeholder="userid" name="userid" id='userid' required value=`${profile.userid}`)
+
+                        div(class="form__group field")
+                            input(type="input" class="form__field" placeholder="Name" name="name" id='name' required value=`${profile.name}`)
+                            label(for="name" class="form__label") Name
+
+                        div(class="form__group field")
+                            input(type="input" class="form__field" placeholder="Title" name="title" id='title' required value=`${profile.title}`)
+                            label(for="name" class="form__label") Title
+
+                        //- label() Name
+                        //- input(class="w3-input" type='text' placeholder='Car ID' name='carid')
+                        //- br
+                        //- br
+                        //- label() Title
+                        //- input(type='text' placeholder='Car ID' name='carid')
+                        //- br
+
+                    div(class='right')
+
+                        div(class="form__group field")
+                            input(type="input" class="form__field" placeholder="Email" name="email" id='email' required value=`${profile.email}`)
+                            label(for="name" class="form__label") Email
+
+                        div(class="form__group field")
+                            input(type="input" class="form__field" placeholder="Phone" name="phone" id='phone' required value=`${profile.phone}`)
+                            label(for="name" class="form__label") Phone
+
+                    br
+                div
+                    br
+                    textarea(name="bio" rows=3) #{profile.bio}
+
+                br
+
+                h3 WORK EXPERIENCE
+
+                button(class='add-exp' type="button" onclick='something()') Add
+
+                div(id='work' class='work')
+                    each item in profile.experiences
+                        div(class='work-block')
+                            div(class="form__group field")
+                                input(type="input" class="form__field" placeholder="Name" name="from" id='from' required value=`${item.from}`)
+                                label(for="name" class="form__label") From
+
+                            div(class="form__group field")
+                                input(type="input" class="form__field" placeholder="Name" name="to" id='to' required value=`${item.to}`)
+                                label(for="name" class="form__label") To
+
+                            div(class="form__group field")
+                                input(type="input" class="form__field" placeholder="Name" name="company" id='company' required value=`${item.company}`)
+                                label(for="name" class="form__label") Company
+
+                            div(class="form__group field")
+                                input(type="input" class="form__field" placeholder="Name" name="position" id='position' required value=`${item.position}`)
+                                label(for="name" class="form__label") Position
+                            br
+                            br
+                br
+                input(class='button' type='Submit' value='Save')

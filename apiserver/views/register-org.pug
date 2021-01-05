@@ -1,0 +1,33 @@
+doctype html
+html
+    head
+        style
+            include ../css/style.css
+        title Blockchain Profile
+        body
+            div(class='header')
+                h1 
+            div(class="min-content")
+                img.login-image(src="https://ibsintelligence.com/wp-content/uploads/2020/08/Hyperledger.png" height=80 alt="Logo Image")
+                p(class="login-title") CREATE NEW ORG ACCOUNT
+                form(method='POST' action='/api/register')
+                    div(class="form__group field")
+                        input(type="input" class="form__field" placeholder="Enter your username" name="username" id='username' required)
+                        label(for="username" class="form__label") Org Username
+
+                    div(class="form__group field")
+                        input(type="password" class="form__field" placeholder="Enter your password" name="password" id='password' required)
+                        label(for="password" class="form__label") Org Password
+
+                    div(class="form__group field")
+                        input(type="password" class="form__field" placeholder="Enter your password agian" name="repassword" id='repassword' required)
+                        label(for="repassword" class="form__label") Repeat Org Password
+
+                    br 
+                    br
+                    input(type="checkbox") 
+                    span.login-remember Agree the terms and policy   
+                    br 
+                    input(class='login-button' type='Submit' value='Register')
+                br
+                a(class='sign-up-link' href='/api/org/login')  Already have account? Sign In
