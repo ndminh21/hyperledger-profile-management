@@ -10,7 +10,7 @@ html
             div(class="min-content")
                 img.login-image(src="https://ibsintelligence.com/wp-content/uploads/2020/08/Hyperledger.png" height=80 alt="Logo Image")
                 p(class="login-title") CREATE NEW ORG ACCOUNT
-                form(method='POST' action='/api/register')
+                form(method='POST' action='/api/org/register')
                     div(class="form__group field")
                         input(type="input" class="form__field" placeholder="Enter your username" name="username" id='username' required)
                         label(for="username" class="form__label") Org Username

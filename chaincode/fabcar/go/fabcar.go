@@ -190,6 +190,39 @@ func (s *SmartContract) IsValidUser(ctx contractapi.TransactionContextInterface,
 	return false, nil
 }
 
+// UpdateOrgLogin adds a new car to the world state with given details
+func (s *SmartContract) UpdateOrgLogin(ctx contractapi.TransactionContextInterface, userName string, password string) error {
+	userLogin := UserLogin{
+		Password: password,
+	}
+
+	infoAsBytes, _ := json.Marshal(userLogin)
+
+	return ctx.GetStub().PutState("login-org-" + userName, infoAsBytes)
+}
+
+// IsValidOrg adds a new car to the world state with given details
+func (s *SmartContract) IsValidOrg(ctx contractapi.TransactionContextInterface, userName string, password string) (isValid bool, err error) {
+	userAsBytes, err := ctx.GetStub().GetState("login-org-" + userName)
+
+	if err != nil {
+		return false, fmt.Errorf("Failed to read from world state. %s", err.Error())
+	}
+
+	if userAsBytes == nil {
+		return false, fmt.Errorf("%s does not exist", userName)
+	}
+
+	user := new(UserLogin)
+	_ = json.Unmarshal(userAsBytes, user)
+
+	if user.Password == password {
+		return true, nil
+	}
+
+	return false, nil
+}
+
 // QueryAllProfiles returns all profile found in world state
 func (s *SmartContract) QueryAllProfiles(ctx contractapi.TransactionContextInterface) ([]QueryProfileResult, error) {
 	startKey := ""
