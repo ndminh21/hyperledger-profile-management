@@ -97,10 +97,10 @@ html
     title BlockChain Profile
     body
         div(class='header')
-            h1 Your Profile
+            h1 #{profile.name}'s Profile
 
         div(class="content")
-            form(method='POST' action='/api/profile/update')
+            form(method='POST' action='/api/org/profile/update')
                 div(class='general')
                     div(class='left')
                         <div id="avatar"></div>
@@ -110,41 +110,42 @@ html
                             input(type="input" class="form__field" placeholder="userid" name="userid" id='userid' required value=`${profile.userid}`)
 
                         div(class="form__group field")
-                            input(type="input" class="form__field" placeholder="Name" name="name" id='name' required value=`${profile.name}`)
+                            input(type="input" class="form__field" placeholder="Name" name="name" id='name' required disabled value=`${profile.name}`)
                             label(for="name" class="form__label") Name
 
                         div(class="form__group field")
-                            input(type="input" class="form__field" placeholder="Title" name="title" id='title' required value=`${profile.title}`)
+                            input(type="input" class="form__field" placeholder="Title" name="title" id='title' required disabled value=`${profile.title}`)
                             label(for="name" class="form__label") Title
-
-                        //- label() Name
-                        //- input(class="w3-input" type='text' placeholder='Car ID' name='carid')
-                        //- br
-                        //- br
-                        //- label() Title
-                        //- input(type='text' placeholder='Car ID' name='carid')
-                        //- br
 
                     div(class='right')
 
                         div(class="form__group field")
-                            input(type="input" class="form__field" placeholder="Email" name="email" id='email' required value=`${profile.email}`)
+                            input(type="input" class="form__field" placeholder="Email" name="email" id='email' required disabled value=`${profile.email}`)
                             label(for="name" class="form__label") Email
 
                         div(class="form__group field")
-                            input(type="input" class="form__field" placeholder="Phone" name="phone" id='phone' required value=`${profile.phone}`)
+                            input(type="input" class="form__field" placeholder="Phone" name="phone" id='phone' required disabled value=`${profile.phone}`)
                             label(for="name" class="form__label") Phone
 
                     br
                 div
                     br
-                    textarea(name="bio" rows=3) #{profile.bio}
-
+                    textarea(name="bio" rows=3 disabled) #{profile.bio}
                 br
+
+            form(method='POST' action='/api/org/profile/update')
+
+                div(class="form__group field" style="display:none;")
+                        input(type="input" class="form__field" placeholder="userid" name="userid" id='userid' required value=`${profile.userid}`)
+                        input(type="input" class="form__field" placeholder="Name" name="name" id='name' required value=`${profile.name}`)
+                        input(type="input" class="form__field" placeholder="Title" name="title" id='title' required value=`${profile.title}`)
+                        input(type="input" class="form__field" placeholder="Email" name="email" id='email' required value=`${profile.email}`)
+                        input(type="input" class="form__field" placeholder="Phone" name="phone" id='phone' required value=`${profile.phone}`)
+                        textarea(name="bio" rows=3) #{profile.bio}
 
                 h3 WORK EXPERIENCE
 
-                //- button(class='add-exp' type="button" onclick='something()') Add
+                button(class='add-exp' type="button" onclick='something()') Add
 
                 div(id='work' class='work')
                     each item in profile.experiences

@@ -11,6 +11,12 @@ html
             }
             console.log('stored');
             local();
+
+            function loginHandler(arr) {
+                console.log("Org login")
+                console.log(arr)
+            }
+
         title Blockchain Profile
         body
             div(class='header')
@@ -30,7 +36,7 @@ html
                     input(type="checkbox") 
                     span.login-remember Remember me   
                     br 
-                    input(class='login-button' type='Submit' value='Click to login')
+                    input(class='login-button' type='Submit' value='Click to login' onclick="loginHandler()")
                 br
                 a(class='sign-up-link' href='/api/register')  Don't have an account yet? Sign Up?
                 br
