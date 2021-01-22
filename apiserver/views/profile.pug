@@ -4,6 +4,16 @@ html
         style
             include ../css/style.css
         script.
+            if ((localStorage.getItem("userName") === null) || (localStorage.getItem("userType") != 'user')) {
+                    window.location.href = 'http://localhost:8081/api/login';
+                }
+
+            function logoutHandler(){
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userType');
+                window.location.href = 'http://localhost:8081/api/login';
+            }
+
             var something = function() {
                 console.log('something')
                 var element = document.getElementById("work");
@@ -96,6 +106,9 @@ html
 
     title BlockChain Profile
     body
+        div(class='logout')
+            input(class='logout-button' type='Submit' value='Logout' onclick="logoutHandler()")
+
         div(class='header')
             h1 Your Profile
 

@@ -149,6 +149,21 @@ span.login-remember{
     font-style: italic;
 }
 
+.logout {
+    text-align: right;
+    margin: 0px 0px 0px 20px;
+}
+
+input.logout-button {
+    background-color: #303D46;
+    color: #fff;
+    padding: 10px 0px;
+    border-radius: 5px;
+    border: 1px solid white;
+    font-size: 14px;
+    width: 70px;
+}
+
 #avatar {
     /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
     background-image: url('https://www.flaticon.com/svg/static/icons/svg/172/172163.svg');

@@ -4,21 +4,13 @@ html
         style
             include ../css/style.css
         script.
-            function local (arr) {
-                var i;
-                i = "#{result}";
-                localStorage.setItem('xyz', i);
-            }
-            console.log('stored');
-            local();
-
             function loginHandler(arr) {
                 var userName = document.getElementById("username").value;
                 var password = document.getElementById("password").value;
-                console.log("Org login")
+                console.log("User login")
                 console.log(userName)
 
-                const url = "http://localhost:8081/api/v2/org/login";
+                const url = "http://localhost:8081/api/v2/login";
                 const data = {
                     'username' : document.getElementById('username').value,
                     'password' : document.getElementById('password').value
@@ -43,16 +35,15 @@ html
                         //- document.getElementById("message").innerHTML = data.encoded;
                         if (data.isValid) {
                             localStorage.setItem('userName', data.userName);
-                            localStorage.setItem('userType', "org");
-                            window.location.href = 'http://localhost:8081/api/allprofiles';
+                            localStorage.setItem('userType', "user");
+                            window.location.href = 'http://localhost:8081/api/profile/' + data.userName;
                         } else {
-                            localStorage.removeItem('userName', data.userName);
-                            localStorage.removeItem('userType', "org");
+                            localStorage.removeItem('userName');
+                            localStorage.removeItem('userType');
                             document.getElementById("message").innerHTML = data.errorMessage;
                         }
 
                     }).catch(function(error) {
-                        console.log(data.errorMessage)
                         document.getElementById("message").innerHTML = data.errorMessage;
                     });
                 return true;
@@ -64,21 +55,22 @@ html
                 h1
             div(class="min-content")
                 img.login-image(src="https://ibsintelligence.com/wp-content/uploads/2020/08/Hyperledger.png" height=80 alt="Logo Image")
-                p(class="login-title") LOGIN TO YOUR ORG ACCOUNT
-                //- form()
+                p(class="login-title") LOGIN TO YOUR ACCOUNT
+
                 div(class="form__group field")
                     input(type="input" class="form__field" placeholder="Enter your username" name="username" id='username' required)
-                    label(for="username" class="form__label") Org Username
+                    label(for="username" class="form__label") Username
 
                 div(class="form__group field")
                     input(type="password" class="form__field" placeholder="Enter your password" name="password" id='password' required)
-                    label(for="password" class="form__label") Org  Password
+                    label(for="password" class="form__label") Password
                 br
                 input(type="checkbox") 
                 span.login-remember Remember me   
                 br 
                 input(class='login-button' type='Submit' value='Click to login' onclick="loginHandler()")
+
                 br
-                a(class='sign-up-link' href='/api/org/register')  Don't have an account yet? Sign Up?
+                a(class='sign-up-link' href='/api/register')  Don't have an account yet? Sign Up?
                 br
-                p(class='error-msg' id='message') #{message}
+                p(class='error-msg') #{message}

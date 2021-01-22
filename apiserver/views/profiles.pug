@@ -3,12 +3,30 @@ html
     head
         style
             include ../css/style.css
-        
+        script.
+
+            function local (arr) {
+                if ((localStorage.getItem("userName") === null) || (localStorage.getItem("userType") != 'org')) {
+                    window.location.href = 'http://localhost:8081/api/org/login';
+                }
+            }
+            local();
+
+            function logoutHandler(){
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userType');
+                window.location.href = 'http://localhost:8081/api/org/login';
+            }
+
         title All Profiles
         body
+            div(class='logout')
+                input(class='logout-button' type='Submit' value='Logout' onclick="logoutHandler()")
+
             div(class="profile-header")
                 img.login-image(src="https://ibsintelligence.com/wp-content/uploads/2020/08/Hyperledger.png" height=80 alt="Logo Image")
-                p(class="login-title") EMPLOYEE 
+                p(class="login-title") EMPLOYEE LIST
+
             div(class="profile-content")
                 each profile in profiles
                     div(class="profile-block-cover")
